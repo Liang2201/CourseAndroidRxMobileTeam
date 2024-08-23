@@ -1,5 +1,8 @@
 package com.rxmobileteam.lecture2_3.fraction
 
+import kotlin.math.roundToInt
+import kotlin.math.roundToLong
+
 class Fraction private constructor(
   val numerator: Int,
   val denominator: Int,
@@ -114,30 +117,36 @@ infix fun Int.over(denominator: Int): Fraction = Fraction.of(this, denominator)
 
 //region get extensions
 // TODO: get the numerator, eg. "val (numerator) = Fraction.of(1, 2)"
-operator fun Fraction.component1(): Int = TODO()
+operator fun Fraction.component1(): Int = numerator
 
 // TODO: get the denominator, eg. "val (_, denominator) = Fraction.of(1, 2)"
-operator fun Fraction.component2(): Int = TODO()
+operator fun Fraction.component2(): Int = denominator
 
 // TODO: get the decimal, index must be 0 or 1
 // TODO: eg. "val numerator = Fraction.of(1, 2)[0]"
 // TODO: eg. "val denominator = Fraction.of(1, 2)[1]"
 // TODO: eg. "val denominator = Fraction.of(1, 2)[2]" should throw an exception
-operator fun Fraction.get(index: Int): Int = TODO()
+operator fun Fraction.get(index: Int): Int {
+  return when (index) {
+    0 -> numerator
+    1 -> denominator
+    else -> throw IndexOutOfBoundsException("Index out of Bounds Exception")
+  }
+}
 //endregion
 
 //region to number extensions
 // TODO: round to the nearest integer
-fun Fraction.roundToInt(): Int = TODO()
+fun Fraction.roundToInt(): Int = decimal.roundToInt()
 
 // TODO: round to the nearest long
-fun Fraction.roundToLong(): Long = TODO()
+fun Fraction.roundToLong(): Long = decimal.roundToLong()
 
 // TODO: return the decimal value as a float
-fun Fraction.toFloat(): Float = TODO()
+fun Fraction.toFloat(): Float = decimal.toFloat()
 
 // TODO: return the decimal value as a double
-fun Fraction.toDouble(): Double = TODO()
+fun Fraction.toDouble(): Double = decimal
 //endregion
 
 fun main() {
@@ -189,20 +198,20 @@ fun main() {
   println("Component2 of 10/79: $denominator2")
 
   // Get operator
-//  println("Get 0 of 1/2: ${Fraction.of(1, 2)[0]}")
-//  println("Get 1 of 1/2: ${Fraction.of(1, 2)[1]}")
-//  println("Get 2 of 1/2: ${runCatching { Fraction.of(1, 2)[2] }}") // Should print "Failure(...)"
-//
-//  // toInt, toLong, toFloat, toDouble
-//  println("toInt 1/2: ${Fraction.of(1, 2).roundToInt()}")
-//  println("toLong 1/2: ${Fraction.of(1, 2).roundToLong()}")
-//  println("toFloat 1/2: ${Fraction.of(1, 2).toFloat()}")
-//  println("toDouble 1/2: ${Fraction.of(1, 2).toDouble()}")
-//
-//  // Range
-//  // Because we implemented Comparable<Fraction>, we can use Fraction in ranges
-//  val range = Fraction.of(1, 2)..Fraction.of(2, 3)
-//  println("1/2 in range 1/2..2/3: ${Fraction.of(1, 2) in range}") // "in" operator is contains
-//  println("2/3 in range 1/2..2/3: ${Fraction.of(2, 3) in range}")
-//  println("7/12 in range 1/2..2/3: ${Fraction.of(7, 12) in range}")
+  println("Get 0 of 1/2: ${Fraction.of(1, 2)[0]}")
+  println("Get 1 of 1/2: ${Fraction.of(1, 2)[1]}")
+  println("Get 2 of 1/2: ${runCatching { Fraction.of(1, 2)[2] }}") // Should print "Failure(...)"
+
+  // toInt, toLong, toFloat, toDouble
+  println("toInt 1/2: ${Fraction.of(1, 2).roundToInt()}")
+  println("toLong 1/2: ${Fraction.of(1, 2).roundToLong()}")
+  println("toFloat 1/2: ${Fraction.of(1, 2).toFloat()}")
+  println("toDouble 1/2: ${Fraction.of(1, 2).toDouble()}")
+
+  // Range
+  // Because we implemented Comparable<Fraction>, we can use Fraction in ranges
+  val range = Fraction.of(1, 2)..Fraction.of(2, 3)
+  println("1/2 in range 1/2..2/3: ${Fraction.of(1, 2) in range}") // "in" operator is containing
+  println("2/3 in range 1/2..2/3: ${Fraction.of(2, 3) in range}")
+  println("7/12 in range 1/2..2/3: ${Fraction.of(7, 12) in range}")
 }
