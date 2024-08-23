@@ -9,7 +9,7 @@ import com.rxmobileteam.utils.ExerciseNotCompletedException;
  * TODO: 1. Implement method {@link ProductServiceFactory#createProductService()}
  */
 public class ProductServiceFactory {
-
+    private final ProductService productService = new ProductService();
     /**
      * Create a new instance of {@link ProductService}
      *
@@ -17,6 +17,6 @@ public class ProductServiceFactory {
      */
     public ProductService createProductService() {
         // TODO: implement this method
-        throw new ExerciseNotCompletedException();
+        return productService;
     }
 }

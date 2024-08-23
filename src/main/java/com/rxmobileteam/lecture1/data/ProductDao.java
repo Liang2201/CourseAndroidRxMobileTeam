@@ -24,11 +24,11 @@ public class ProductDao {
      * @param product a product to store
      * @return {@code true} if a product was stored, {@code false} otherwise
      */
-    public boolean add(@NotNull Product product) throws ExerciseNotCompletedException {
+    public boolean add(@NotNull Product product) {
         // TODO: implement this method
         Optional<Product> productOpt= Optional.of(product);
         productOpt.ifPresent(products::add);
-        throw new ExerciseNotCompletedException();
+        return productOpt.isPresent();
     }
 
     /**
@@ -38,9 +38,6 @@ public class ProductDao {
      */
     public Set<Product> findAll() {
         // TODO: implement this method
-        if (products.isEmpty()) {
-            throw new ExerciseNotCompletedException();
-        }
         return products;
     }
 

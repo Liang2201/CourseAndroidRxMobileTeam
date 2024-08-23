@@ -9,7 +9,7 @@ suspend fun maybeFailedFunction(): Int {
   delay(100)
 
   if (count.incrementAndGet() % 2 == 0) {
-    throw RuntimeException("Failed")
+    throw Exception()
   } else {
     return 42
   }

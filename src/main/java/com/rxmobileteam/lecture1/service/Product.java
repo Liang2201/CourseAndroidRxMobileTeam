@@ -14,7 +14,9 @@ public class Product {
     public @NotNull String getDescription() {
         return description;
     }
-
+    public @NotNull String getName() {
+        return name;
+    }
     public Product(
         @NotNull String id,
         @NotNull String name,
